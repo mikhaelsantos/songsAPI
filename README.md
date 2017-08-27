@@ -76,7 +76,10 @@ curl 'http://<localhost>:<port>/songs/avg/rating?song_id=59a2829a32c87b8a8736ba4
 **Note:** Beware of port availability
 
 ### Start API
-1. Docker (MongoDB + API + Data)
+
+Service can be launched through docker containers or setting up a development enviroment
+
+**Docker (MongoDB + API + Data)**
 
 ```
 git clone https://github.com/mikhaelsantos/songsAPI.git
@@ -91,13 +94,13 @@ docker exec -it flask-api python3.5 push_data.py
 curl http://localhost:5000/songs
 ```
 
-2. Set up development environment (Tested on macOS)
+**Set up development environment (Tested on macOS)**
 
 **Note:**
  * If you are running your own mongodb instance change **MONGODB_URI** in .env to correct value
  * Populate the database
 
-**Setup mongodb docker container**
+Setup mongodb docker container
 
 **Note:** If your running your own instance you can skip this part.
 
@@ -106,7 +109,7 @@ docker run --name some-mongo -p 27017:27017 -d mongo
 docker exec -it some-mongo mongo admin
 db.createUser({ user: "admin", pwd: "password", roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
 ```
-**Run the api**
+Run the api
 ```
 source .env
 flask run
@@ -114,16 +117,20 @@ flask run
 
 ## How to Test
 
+Tests can be run with a newly created mongodb docker container or a already available mongodb instance
+
 #### Setup mongodb docker container
 
 **Note:** If your running your own instance you can skip this part.
+
+Setup mongodb
 
 ```
 docker run --name some-mongo -p 27017:27017 -d mongo
 docker exec -it some-mongo mongo admin
 db.createUser({ user: "admin", pwd: "password", roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
 ```
-**Run python command**
+Run python command
 
 ```
 python3 -m unittest -v tests.test_songs_api
@@ -131,13 +138,13 @@ python3 -m unittest -v tests.test_songs_api
 
 #### Already have a mongoDB instance up and running
 
-**Change mongodb URI at ./instance/config **Class TestingConfig** **
+Change mongodb URI at ./instance/config **Class TestingConfig**
 
 ```
 MONGODB_URI = 'mongodb://<username>:<password>@<host>'
 ```
 
-2. Run python command
+Run python command
 
 ```
 python3 -m unittest -v tests.test_songs_api
