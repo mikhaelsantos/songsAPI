@@ -73,13 +73,11 @@ curl 'http://<localhost>:<port>/songs/avg/rating?song_id=59a2829a32c87b8a8736ba4
 
 ## How to run
 
-**Note:** Beware of port availability
-
-### Start API
-
 Service can be launched through docker containers or setting up a development enviroment
 
-**Docker (MongoDB + API + Data)**
+### Docker (MongoDB + API + Data)
+
+**Note:** Beware of port availability
 
 ```
 git clone https://github.com/mikhaelsantos/songsAPI.git
@@ -94,7 +92,7 @@ docker exec -it flask-api python3.5 push_data.py
 curl http://localhost:5000/songs
 ```
 
-**Set up development environment (Tested on macOS)**
+### Set up development environment (Tested on macOS)
 
 **Note:**
  * If you are running your own mongodb instance change **MONGODB_URI** in .env to correct value
@@ -119,7 +117,7 @@ flask run
 
 Tests can be run with a newly created mongodb docker container or a already available mongodb instance
 
-#### Setup mongodb docker container
+### Setup mongodb docker container
 
 **Note:** If your running your own instance you can skip this part.
 
@@ -137,7 +135,7 @@ source .env
 python3 -m unittest -v tests.test_songs_api
 ```
 
-#### Already have a mongoDB instance up and running
+### Already have a mongoDB instance up and running
 
 Change mongodb URI at ./instance/config **Class TestingConfig**
 
