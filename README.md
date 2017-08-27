@@ -10,6 +10,14 @@
 
 Flask API which operates over a Song list and allows users to rate each song from 1 to 5.
 
+## Features
+
+* Returns a list of songs with some details on them with optional pagination.
+* Returns the average difficulty for all songs or, optionaly, songs of a specific level
+* Searches songs based of a string and is case insensitive.
+* Adds ratings to song from 1 to 5
+* Returns the min, max and avg rating of a given song.
+
 **Routes:**
 
 GET:
@@ -24,6 +32,25 @@ POST:
 * /songs
 * /songs/rating?song_id=*mandatory*&rating=*mandatory*
 
+## Example calls
+
+```
+curl 'http://<localhost>:<port>/songs?page=10&page_size=1'
+```
+
+```
+curl 'http://<localhost>:<port>/songs/search?message=finger'
+```
+
+```
+curl 'http://<localhost>:<port>/songs/avg/difficulty?level=13'
+```
+
+```
+curl 'http://<localhost>:<port>/songs/avg/rating?song_id=59a2829a32c87b8a8736ba40&rating=3'
+```
+
+
 ## Dependencies
 
 * Python 3.6.1
@@ -36,11 +63,11 @@ POST:
 
 ## How to run
 
-One common step to both testing and and running the app is setting up the mongodb instance and credentials:
+One common step to both testing and running the app is setting up the mongodb instance and credentials:
 
 #### Set up a new Docker Container (No mongodb instance running)
 
-Note: If your running your own instance you can skip this part.
+**Note:** If your running your own instance you can skip this part.
 
 1. Setup docker container
 
@@ -48,7 +75,7 @@ Note: If your running your own instance you can skip this part.
 docker run --name some-mongo -p 27017:27017 -d mongo
 ```
 
-NOTE: Beware of port availability
+**Note:** Beware of port availability
 
 2. Enter container
 
@@ -66,7 +93,7 @@ db.createUser({ user: "admin", pwd: "password", roles: [ { role: "userAdminAnyDa
 
 1. Set up development environment (Tested on macOS)
 
-Note: If you are running your own mongodb instance change **MONGODB_URI** in .env to correct value
+**Note:** If you are running your own mongodb instance change **MONGODB_URI** in .env to correct value
 
 ```
 source .env
