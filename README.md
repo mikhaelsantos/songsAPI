@@ -98,6 +98,7 @@ curl http://localhost:5000/songs
  * Populate the database
 
 **Setup mongodb docker container**
+
 **Note:** If your running your own instance you can skip this part.
 
 ```
