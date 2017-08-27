@@ -7,8 +7,11 @@
 * Example calls
 * Dependencies
 * How to Run
+  * Docker (MongoDB + API + Data) -> Fastest way to get up and running
+  * Development environment (Tested on macOS)
 * How to Test
-* Don't care, about details, does it run?
+  * Docker setup
+  * Own setup
 * FAQ
 
 ## Description
