@@ -17,6 +17,9 @@
 ## Description
 
 Flask API which operates over a Song list and allows users to rate each song from 1 to 5.
+The project was developed with a mongodb running on a docker container.
+
+For ease of testing the **Docker (MongoDB + API + Data)** step by step should be pretty much bullet proof and was tested with Docker version 17.06.0-ce.
 
 ## Features
 
