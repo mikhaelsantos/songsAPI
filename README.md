@@ -73,37 +73,13 @@ curl 'http://<localhost>:<port>/songs/avg/rating?song_id=59a2829a32c87b8a8736ba4
 
 ## How to run
 
-One common step to both testing and running the app is setting up the mongodb instance and credentials:
-
-#### Set up a new Docker Container (No mongodb instance running)
-
-**Note:** If your running your own instance you can skip this part.
-
-1. Setup docker container
-
-```
-docker run --name some-mongo -p 27017:27017 -d mongo
-```
-
 **Note:** Beware of port availability
-
-2. Enter container
-
-```
-docker exec -it some-mongo mongo admin
-```
-
-3. Run command to create user
-
-```
-db.createUser({ user: "admin", pwd: "password", roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
-```
 
 ### Start API
 1. Docker (MongoDB + API + Data)
 
 ```
-https://github.com/mikhaelsantos/songsAPI.git
+git clone https://github.com/mikhaelsantos/songsAPI.git
 cd songsAPI
 docker run --name some-mongo -p 27017:27017 -d mongo
 docker exec -it some-mongo mongo admin
@@ -121,6 +97,15 @@ curl http://localhost:5000/songs
  * If you are running your own mongodb instance change **MONGODB_URI** in .env to correct value
  * Populate the database
 
+**Setup mongodb docker container**
+**Note:** If your running your own instance you can skip this part.
+
+```
+docker run --name some-mongo -p 27017:27017 -d mongo
+docker exec -it some-mongo mongo admin
+db.createUser({ user: "admin", pwd: "password", roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
+```
+**Run the api**
 ```
 source .env
 flask run
@@ -128,9 +113,16 @@ flask run
 
 ## How to Test
 
-#### If you followed the steps in **Set up a new Docker Container (No mongodb instance running)**
+#### Setup mongodb docker container
 
-1. Run python command
+**Note:** If your running your own instance you can skip this part.
+
+```
+docker run --name some-mongo -p 27017:27017 -d mongo
+docker exec -it some-mongo mongo admin
+db.createUser({ user: "admin", pwd: "password", roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
+```
+**Run python command**
 
 ```
 python3 -m unittest -v tests.test_songs_api
@@ -138,7 +130,7 @@ python3 -m unittest -v tests.test_songs_api
 
 #### Already have a mongoDB instance up and running
 
-1. Change mongodb URI at ./instance/config **Class TestingConfig**
+**Change mongodb URI at ./instance/config **Class TestingConfig** **
 
 ```
 MONGODB_URI = 'mongodb://<username>:<password>@<host>'
