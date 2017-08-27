@@ -135,8 +135,12 @@ python3 -m unittest -v tests.test_songs_api
 **Shouldn't you have a class for songs and rating models and why?**
 
 For production grade code I would have, here it was just because of the time restraint.
-The advantage of having specific models is for business logic and sensitization of the data the disadvantage is that then changing the schema involves more work
+The advantage of having specific models is for business logic and  data sensitization but the disadvantage is that changing the schema involves more work.
 
+**Think what will happen when the collection of songs grow to millions of documents.**
+
+If the collection grows to millions of documents the utilization of indexes will be the minimum requirement which would be based on the most frequent queried fields.
+Also sharding the song collection to multiple shard servers based on a key would also reduce query times.
 
 ## Maintainers
 1. Mikhael Santos
