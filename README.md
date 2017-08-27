@@ -1,9 +1,12 @@
 # Simple Flask API for Songs
 
 * Description
+* Features
+* Example calls
 * Dependencies
 * How to Run
-* How to test
+* How to Test
+* Don't care, about details, does it run?
 * FAQ
 
 ## Description
@@ -50,7 +53,6 @@ curl 'http://<localhost>:<port>/songs/avg/difficulty?level=13'
 curl 'http://<localhost>:<port>/songs/avg/rating?song_id=59a2829a32c87b8a8736ba40&rating=3'
 ```
 
-
 ## Dependencies
 
 * Python 3.6.1
@@ -90,19 +92,29 @@ db.createUser({ user: "admin", pwd: "password", roles: [ { role: "userAdminAnyDa
 ```
 
 ### Start API
+1. Docker (MongoDB + API + Data)
 
-1. Set up development environment (Tested on macOS)
+```
+https://github.com/mikhaelsantos/songsAPI.git
+cd songsAPI
+docker run --name some-mongo -p 27017:27017 -d mongo
+docker exec -it some-mongo mongo admin
+db.createUser({ user: "admin", pwd: "password", roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
+<CTRL+C>
+docker build -t flask:latest .
+docker run -d --rm --name flask-api -p 5000:5000 --link some-mongo:localhost flask:latest
+docker exec -it flask-api python3.5 push_data.py
+curl http://localhost:5000/songs
+```
 
-**Note:** If you are running your own mongodb instance change **MONGODB_URI** in .env to correct value
+2. Set up development environment (Tested on macOS)
+
+**Note:**
+ * If you are running your own mongodb instance change **MONGODB_URI** in .env to correct value
+ * Populate the database
 
 ```
 source .env
-```
-
-
-2. Run it
-
-```
 flask run
 ```
 
@@ -141,6 +153,10 @@ The advantage of having specific models is for business logic and  data sensitiz
 
 If the collection grows to millions of documents the utilization of indexes will be the minimum requirement which would be based on the most frequent queried fields.
 Also sharding the song collection to multiple shard servers based on a key would also reduce query times.
+
+**Wouldn't a frontend be nice?**
+
+Yes, but it seems out of the scope of this homework.
 
 ## Maintainers
 1. Mikhael Santos
