@@ -100,8 +100,6 @@ curl http://localhost:5000/songs
 
 Setup mongodb docker container
 
-**Note:** If your running your own instance you can skip this part.
-
 ```
 docker run --name some-mongo -p 27017:27017 -d mongo
 docker exec -it some-mongo mongo admin
