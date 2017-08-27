@@ -133,6 +133,7 @@ db.createUser({ user: "admin", pwd: "password", roles: [ { role: "userAdminAnyDa
 Run python command
 
 ```
+source .env
 python3 -m unittest -v tests.test_songs_api
 ```
 
@@ -147,6 +148,7 @@ MONGODB_URI = 'mongodb://<username>:<password>@<host>'
 Run python command
 
 ```
+source .env
 python3 -m unittest -v tests.test_songs_api
 ```
 
