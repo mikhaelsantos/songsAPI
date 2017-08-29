@@ -10,16 +10,15 @@ from pymongo import MongoClient
 # local import
 from instance.config import app_config
 
-client = MongoClient('mongodb://admin:password@localhost')
-db = client['song_list']
-col_songs = db.songs
-col_ratings = db.ratings
-
-
 def create_app(config_name):
     app = FlaskAPI(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
+
+    client = MongoClient(app.config.get("MONGODB_URI"))
+    db = client['song_list']
+    col_songs = db.songs
+    col_ratings = db.ratings
 
     @app.route('/songs', methods=['POST', 'GET'])
     def songs():
